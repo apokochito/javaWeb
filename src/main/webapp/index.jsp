@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>Hello World! from JSP</h2>
-<form action="input" method="POST">
+<form action="HelloServlet" method="POST">
 	Enter your name:
     <input type="text" name="user" />
 	<input type="submit" value="Submit" />

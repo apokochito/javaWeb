@@ -10,9 +10,4 @@
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/servlet</url-pattern>
     </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>servletPost</servlet-name>
-        <url-pattern>/input</url-pattern>
-    </servlet-mapping>
 </web-app>

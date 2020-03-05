@@ -9,5 +9,10 @@
 </head>
 <body>
 <h2>Hello World! from JSP</h2>
+<form action="input" method="POST">
+	Enter your name:
+    <input type="text" name="user" />
+	<input type="submit" value="Submit" />
+</form>
 </body>
 </html>

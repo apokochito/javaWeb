@@ -1,6 +1,8 @@
 package com.java.servlet;
 
 
-public class BooksRepository {
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface BooksRepository extends MongoRepository<Book, String> {
 
 }

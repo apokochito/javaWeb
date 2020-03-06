@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 @WebServlet("/HelloServlet")
-public class HelloServlet extends HttpServlet {
+public class Servlet extends HttpServlet {
     public void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
         httpServletResponse.getWriter().print("Hello from servlet");
     }

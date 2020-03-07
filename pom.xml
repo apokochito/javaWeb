@@ -45,10 +45,10 @@
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
         </dependency>
     </dependencies>
 
@@ -61,7 +61,7 @@
                 <configuration>
                     <server>tomcat-development-server</server>
                     <port>9090</port>
-                    <path>/servlet</path>
+                    <path>/Servlet</path>
                 </configuration>
             </plugin>
         </plugins>

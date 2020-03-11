@@ -1,4 +1,7 @@
-package com.java.servlet;
+package com.java.servlet.servlets;
+
+import com.java.servlet.domain.Book;
+import com.java.servlet.repository.BooksRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,14 +23,14 @@ public class ViewServlet extends HttpServlet {
         out.println("<a href='index.html'>Add New Book</a>");
         out.println("<h1>Book List</h1>");
 
-        List<Book> books = repository.findAll();
+        List<Book> books = BooksRepository.findAll();
 
-        out.print("<table border='1' width='100%'");
-        out.print("<tr><th>Id</th><th>Title</th><th>Price</th></tr> ");
+        out.println("<table border='1' width='100%'");
+        out.println("<tr><th>Id</th><th>Title</th><th>Price</th></tr>");
         for (Book e : books) {
-            out.print("<tr><td>" + e.getId() + "</td><td>" + e.getTitle() + "</td><td>" + e.getPrice() + "</td><td><a href = 'EditServlet?id="+e.getId()+"'>edit</a></td><td ><a href = 'DeleteServlet?id="+e.getId()+"'>delete</a></td></tr>");
+            out.println("<tr><td>" + e.get_id() + "</td><td>" + e.getTitle() + "</td><td>" + e.getPrice() + "</td><td><a href = 'EditServlet?id=" + e.get_id() + "'>edit</a></td><td><a href = 'DeleteServlet?id=" + e.get_id() + "'>delete</a></td></tr>");
         }
-        out.print("</table>");
+        out.println("</table>");
 
         out.close();
     }

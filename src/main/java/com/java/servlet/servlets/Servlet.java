@@ -1,4 +1,7 @@
-package com.java.servlet;
+package com.java.servlet.servlets;
+
+import com.java.servlet.domain.Book;
+import com.java.servlet.repository.BooksRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +30,7 @@ public class Servlet extends HttpServlet {
 
         BooksRepository.save(book);
         out.print("<p>Record saved successfully!</p>");
+        out.println("<a href='index.html'>Add New Book</a>");
         // httpServletRequest.getRequestDispatcher("index.html").include(httpServletRequest, httpServletResponse);
 
         out.close();

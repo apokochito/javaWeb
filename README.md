@@ -6,3 +6,4 @@
     - JSP (See this app - http://localhost:9090/servlet)
     - Servlet POST Insert book details in the input form and submit it to save it.
     - Servlet GET all using mongoDB find(), get all the books with this ViewServlet view.
+    - Servlet UPDATE book, using edit view.

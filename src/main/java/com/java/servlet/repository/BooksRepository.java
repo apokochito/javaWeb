@@ -5,10 +5,11 @@ import com.java.servlet.domain.Book;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import org.bson.BsonDocument;
+import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -25,6 +26,7 @@ public class BooksRepository {
             db = mongoClient.getDatabase("library");
             return db.getCollection("faculty");
         } catch (Exception e) {
+            System.err.println("Occurs an exception to get the connection to the database");
             System.out.println(e);
             return e.getMessage();
         }
@@ -38,7 +40,7 @@ public class BooksRepository {
             doc.put("price", book.getPrice());
             collection.insertOne(doc);
         } catch (Exception e) {
-            System.err.println("Occurs an exception");
+            System.err.println("Occurs an exception to save this resource");
             System.out.println(e.getMessage());
         }
     }
@@ -59,6 +61,7 @@ public class BooksRepository {
             }
             return books;
         } catch (Exception e) {
+            System.err.println("Occurs an exception to get all the resources");
             System.out.println(e.getMessage());
             return null;
         }
@@ -76,9 +79,34 @@ public class BooksRepository {
             book.setPrice(col.first().get("price").toString());
             return book;
         } catch (Exception e) {
-            System.err.println("Occurs an exception");
+            System.err.println("Occurs an exception to get the id of this resource");
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    public static void update(Book book) {
+        try {
+            MongoCollection<Document> collection = (MongoCollection<Document>) getConnetion();
+            Document col = collection.find(Filters.eq("_id", new ObjectId(book.get_id()))).first();
+            Document document = new Document();
+            document.append("title", book.getTitle());
+            document.append("price", book.getPrice());
+            collection.replaceOne(Filters.eq("_id", new ObjectId(book.get_id())), new Document().append("title", book.getTitle()).append("price", book.getPrice()));
+        } catch (Exception e) {
+            System.err.println("Occurs an exception to update this resource");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void delete(String id) {
+        try {
+            MongoCollection<Document> collection = (MongoCollection<Document>) getConnetion();
+            System.out.println(id);
+            collection.deleteOne(Filters.eq("_id", new ObjectId(id)));
+        } catch (Exception e) {
+            System.err.println("Occurs an exception to delete this resource");
+            System.out.println(e.getMessage());
         }
     }
 }

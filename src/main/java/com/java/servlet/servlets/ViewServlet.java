@@ -27,9 +27,14 @@ public class ViewServlet extends HttpServlet {
 
         out.println("<table border='1' width='100%'");
         out.println("<tr><th>Id</th><th>Title</th><th>Price</th></tr>");
-        for (Book e : books) {
-            out.println("<tr><td>" + e.get_id() + "</td><td>" + e.getTitle() + "</td><td>" + e.getPrice() + "</td><td><a href = 'EditServlet?id=" + e.get_id() + "'>edit</a></td><td><a href = 'DeleteServlet?id=" + e.get_id() + "'>delete</a></td></tr>");
+        try {
+            for (Book e : books) {
+                out.println("<tr><td>" + e.get_id() + "</td><td>" + e.getTitle() + "</td><td>" + e.getPrice() + "</td><td><a href = 'EditServlet?id=" + e.get_id() + "'>edit</a></td><td><a href = 'DeleteServlet?id=" + e.get_id() + "'>delete</a></td></tr>");
+            }
+        } catch (Exception e) {
+            System.out.println("Occurs an exception to display all records" + e.getMessage());
         }
+
         out.println("</table>");
 
         out.close();

@@ -5,15 +5,16 @@ import com.java.servlet.domain.Book;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.client.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Updates;
-import org.bson.BsonDocument;
-import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BooksRepository {
@@ -27,7 +28,7 @@ public class BooksRepository {
             return db.getCollection("faculty");
         } catch (Exception e) {
             System.err.println("Occurs an exception to get the connection to the database");
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return e.getMessage();
         }
     }
@@ -85,17 +86,15 @@ public class BooksRepository {
         }
     }
 
-    public static void update(Book book) {
+    public static void update(Book book, String newTitle, String newPrice) {
         try {
             MongoCollection<Document> collection = (MongoCollection<Document>) getConnetion();
-            Document col = collection.find(Filters.eq("_id", new ObjectId(book.get_id()))).first();
-            Document document = new Document();
-            document.append("title", book.getTitle());
-            document.append("price", book.getPrice());
-            collection.replaceOne(Filters.eq("_id", new ObjectId(book.get_id())), new Document().append("title", book.getTitle()).append("price", book.getPrice()));
+            System.out.println(book.get_id() + book.getPrice() + book.getTitle());
+            collection.updateOne(Filters.eq("_id", new ObjectId(book.get_id())), new Document("$set", new Document("price", newPrice)));
+            collection.updateOne(Filters.eq("_id", new ObjectId(book.get_id())), new Document("$set", new Document("title", newTitle)));
         } catch (Exception e) {
             System.err.println("Occurs an exception to update this resource");
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage() + "-" + e.toString() + "-" + Arrays.toString(e.getStackTrace()));
         }
     }
 

@@ -42,7 +42,9 @@ public class EditServlet extends HttpServlet {
         PrintWriter out = httpServletResponse.getWriter();
         String bookId = httpServletRequest.getParameter("id");
         Book book = repository.getBookById(bookId);
-        repository.update(book);
+        String bookTitle = httpServletRequest.getParameter("title");
+        String bookPrice = httpServletRequest.getParameter("price");
+        repository.update(book, bookTitle, bookPrice);
         out.print("<p>Record updated successfully!</p>");
         out.println("<a href='index.html'>Add New Book</a>");
         out.println("<a href='ViewServlet'>View books</a>");

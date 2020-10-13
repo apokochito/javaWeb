@@ -1,6 +1,6 @@
 # javaWebBasics
 
-- Java Servlets (**servlet branch**)
+- Java Servlets (**master branch**)
 
     - Overview
     
